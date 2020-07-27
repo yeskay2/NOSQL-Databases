@@ -1,0 +1,46 @@
+sudo cassandra -R
+cqlsh
+
+
+1. CREATE KEYSPACE Company WITH replication ={'class':'SimpleStrategy', 'replication_factor':3};
+
+2. DESCRIBE keyspaces;
+     USE Company;
+
+3. CREATE TABLE employee(Empl_ID int PRIMARY KEY,F_Name text, L_Name text);
+	CREATE TABLE project(Project_ID int PRIMARY KEY,project_Name text);
+	CREATE TABLE employee_project(Empl_ID int , Project_ID int 	,Assigned_Project_Task text  PRIMARY KEY );
+
+
+4. INSERT INTO Company.employee(Empl_ID ,F_Name , L_Name ) VALUES (37,'Florence', 'New_York');
+
+	INSERT INTO Company.employee(Empl_ID ,F_Name , L_Name ) VALUES 	(1234,'David', 'Paris');
+
+5. INSERT INTO Company.project(Project_ID ,project_Name) VALUES (10 , 'Online_Market_Research');
+
+	INSERT INTO Company.project(Project_ID ,project_Name) VALUES (20 , 	'Flight_Booking');
+
+	INSERT INTO Company.employee_project(Empl_ID , Project_ID  	,Assigned_Project_Task ) VALUES (37, 10, 'Project_Management');
+
+	INSERT INTO Company.employee_project(Empl_ID , Project_ID  	,Assigned_Project_Task ) VALUES (1234, 10, 'DB_Devolepemnt');
+
+	INSERT INTO Company.employee_project(Empl_ID , Project_ID  	,Assigned_Project_Task ) VALUES (1234, 20, 'Lead Architect');
+
+
+SELECT * FROM employee;
+SELECT * FROM project;
+SELECT * FROM employee_project;
+
+ALTER TABLE employee ADD salary int;
+UPDATE employee SET salary=80000 WHERE Empl_ID = 37;
+UPDATE employee SET salary=120000 WHERE Empl_ID = 1234;
+
+
+UPDATE project SET project_name='Cassandra DB' WHERE Project_ID = 10;
+DELETE FROM Company.employee WHERE Empl_ID=37;
+
+SELECT EMPLOYE_ID FROM EMP WHERE COUNT(EMP_ID)>1
+
+SELECT AVG(salary) AS Average FROM Company.employee;
+
+
